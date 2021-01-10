@@ -3,34 +3,37 @@ import ReactDOM from 'react-dom'
 import './index.css'
 
 interface SquareProps {
-  value: String
+  value: string
+  onClick: () => void
 }
 
-type SquareState = {
-  value: String
-}
-
-class Square extends React.Component<SquareProps, SquareState> {
-  constructor(props: SquareProps) {
-    super(props)
-    this.state = { value: props.value }
-  }
-  // state: SquareState = {
-  //   value: this.props.value,
-  // }
-
+class Square extends React.Component<SquareProps> {
   render() {
     return (
-      <button className="square" onClick={() => this.setState({ value: 'X' })}>
-        {this.state.value}
+      <button className="square" onClick={() => this.props.onClick()}>
+        {this.props.value}
       </button>
     )
   }
 }
 
-class Board extends React.Component {
-  renderSquare(i: Number) {
-    return <Square value={i.toString()} />
+type BoardState = {
+  squares: string[]
+}
+
+class Board extends React.Component<{}, BoardState> {
+  state: BoardState = {
+    squares: Array(9).fill(null),
+  }
+
+  handleClick(i: number) {
+    const squares = this.state.squares.slice()
+    squares[i] = 'X'
+    this.setState({ squares: squares })
+  }
+
+  renderSquare(i: number) {
+    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)} />
   }
 
   render() {

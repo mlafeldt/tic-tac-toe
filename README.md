@@ -1,3 +1,7 @@
+The Tic Tac Toe app from https://reactjs.org/tutorial/tutorial.html implemented in TypeScript
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
